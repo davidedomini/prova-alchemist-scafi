@@ -1,0 +1,22 @@
+incarnation: scafi
+
+network-model:
+  type: ConnectWithinDistance
+  parameters: [10]
+
+_reactions:
+  - program: &program
+      - time-distribution:
+          type: DiracComb
+          parameters: [ 1.0 ]
+        type: Event
+        actions:
+          - type: RunScafiProgram
+            parameters: [it.unibo.SimpleScafiAgent]
+      - program: send
+
+deployments:
+  type: Grid
+  parameters: [-1, -1, 1, 1, 1, 1, 0, 0]
+  programs:
+    - *program
